@@ -1,0 +1,32 @@
+<div class="editor-container" *ngIf="note; else empty">
+  <div class="editor-toolbar">
+    <div class="left">
+      <span class="badge" *ngIf="note?.pinned" title="Pinned">📌 Pinned</span>
+      <span class="badge amber" *ngIf="note?.favorite" title="Favorite">⭐ Favorite</span>
+    </div>
+    <div class="right">
+      <span class="timestamp">Updated {{ note.updatedAt | date:'short' }}</span>
+    </div>
+  </div>
+
+  <input
+    class="title-input"
+    type="text"
+    [(ngModel)]="localTitle"
+    (input)="onTitleInput()"
+    placeholder="Note title"
+    aria-label="Note title" />
+
+  <textarea
+    class="content-input"
+    [(ngModel)]="localContent"
+    (input)="onContentInput()"
+    placeholder="Write your note here..."
+    aria-label="Note content"></textarea>
+</div>
+
+<ng-template #empty>
+  <div class="empty-editor">
+    <p>Select a note from the left, or click + to create a new one.</p>
+  </div>
+</ng-template>

@@ -1,0 +1,29 @@
+<div class="notes-list">
+  <ng-container *ngIf="notes.length; else empty">
+    <button
+      class="note-item"
+      *ngFor="let n of notes; trackBy: trackById"
+      (click)="select.emit(n.id)"
+      [attr.aria-current]="selectedId === n.id ? 'true' : 'false'">
+      <div class="note-main">
+        <div class="title-row">
+          <span class="title">{{ n.title || 'Untitled' }}</span>
+          <span class="meta" *ngIf="n.pinned" title="Pinned" aria-label="Pinned">📌</span>
+          <span class="meta" *ngIf="n.favorite" title="Favorite" aria-label="Favorite">⭐</span>
+        </div>
+        <div class="snippet">{{ n.content || 'No content yet...' }}</div>
+      </div>
+      <div class="actions" (click)="$event.stopPropagation()">
+        <button class="icon-btn" (click)="togglePin.emit(n.id)" aria-label="Toggle pin">{{ n.pinned ? 'Unpin' : 'Pin' }}</button>
+        <button class="icon-btn danger" (click)="delete.emit(n.id)" aria-label="Delete note">Delete</button>
+      </div>
+      <div class="updated">Updated {{ n.updatedAt | date:'short' }}</div>
+    </button>
+  </ng-container>
+
+  <ng-template #empty>
+    <div class="empty">
+      <p>No notes yet. Create your first note using the + button.</p>
+    </div>
+  </ng-template>
+</div>

@@ -1,0 +1,29 @@
+<div class="layout">
+  <app-header (search)="onSearch($event)"></app-header>
+
+  <div class="content">
+    <aside class="sidebar surface">
+      <div class="sidebar-header">
+        <h2 class="sidebar-title">Notes</h2>
+        <button class="add-btn" (click)="addNote()" aria-label="Add new note">+ New</button>
+      </div>
+
+      <div class="list-wrapper">
+        <app-notes-list
+          [notes]="(notes$ | async) ?? []"
+          (select)="onSelect($event)"
+          (togglePin)="onTogglePin($event)"
+          (delete)="onDelete($event)"></app-notes-list>
+      </div>
+    </aside>
+
+    <main class="main">
+      <!-- Inline editor view for current route -->
+      <router-outlet></router-outlet>
+    </main>
+  </div>
+
+  <button class="fab" (click)="addNote()" aria-label="Add new note">
+    +
+  </button>
+</div>

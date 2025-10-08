@@ -1,0 +1,15 @@
+<header class="app-header surface">
+  <div class="brand">
+    <span class="logo" aria-hidden="true">📝</span>
+    <h1 class="title">{{ title }}</h1>
+  </div>
+  <div class="search">
+    <input
+      [(ngModel)]="term"
+      (input)="onInput()"
+      [placeholder]="placeholder"
+      type="search"
+      class="search-input"
+      aria-label="Search notes" />
+  </div>
+</header>
